@@ -27,7 +27,7 @@ public class KafkaConfig {
   private String kafkaGroupId;
 
   @Bean
-  private ConsumerFactory<String, byte[]> consumerFactory() {
+  public ConsumerFactory<String, byte[]> consumerFactory() {
     Map<String, Object> props = new HashMap<>();
     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaBootstrapServers);
     props.put(GROUP_ID_CONFIG, kafkaGroupId);

@@ -1,25 +1,25 @@
 package com.rashidi.poc.spring.kafka.consumer.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
 import java.time.Instant;
 import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
 
-  @JsonProperty("id")
-  private final String id;
+  private String id;
 
-  @JsonProperty("timestamp")
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  private final Instant timestamp;
+  private Instant timestamp;
 
-  @JsonProperty("params")
-  private final Map<String, Object> params;
+  private Map<String, Object> params;
 
-  public Event(String id, Instant timestamp, Map<String, Object> params) {
+  @JsonCreator
+  public Event(@JsonProperty("id") String id,
+               @JsonProperty("timestamp") Instant timestamp,
+               @JsonProperty("params") Map<String, Object> params) {
     this.id = id;
     this.timestamp = timestamp;
     this.params = params;
@@ -35,5 +35,14 @@ public class Event {
 
   public Map<String, Object> getParams() {
     return params;
+  }
+
+  @Override
+  public String toString() {
+    return "Event{" +
+      "id='" + id + '\'' +
+      ", timestamp=" + timestamp +
+      ", params=" + params +
+      '}';
   }
 }

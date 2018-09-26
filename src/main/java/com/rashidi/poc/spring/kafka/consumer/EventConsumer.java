@@ -31,7 +31,7 @@ public class EventConsumer {
 
     try {
       Event event = objectMapper.readValue(record.value(), Event.class);
-      LOG.info("Event {} received.", event.getId());
+      LOG.info("Event {} received.", event.toString());
     } catch (IOException ioe) {
       LOG.warn("Could not deserialize Event.", ioe);
     }
